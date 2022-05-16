@@ -1,0 +1,7 @@
+Mathematica Code:
+
+Do[If[i==Total[IntegerDigits[i]^5],Print[i]],{i,2,999999}]
+
+Just add once the numbers are out.
+
+Maximum limit is justified, since 6x9^5=354294.

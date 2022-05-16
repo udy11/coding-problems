@@ -1,0 +1,9 @@
+ARITHMETIC SERIES
+
+Add sums for 3 and 5 separately and subtract sum for 15,
+which was doubly counted.
+
+(3+6+9+...+999) + (5+10+15+...+995) - (15+30+45+...+990)
+= (333*(3+999) + 199*(5+995) - 66*(15+990)) / 2
+= (333666 + 199000 - 66330) / 2
+= 233168

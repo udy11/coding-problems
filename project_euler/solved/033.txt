@@ -1,0 +1,3 @@
+a,b,c will be non-zero digits, form the equation 9ac+bc=10ab, and use the following mathematica code to form the solutions:
+
+Reduce[9a c+b c==10a b&&a/c<1&&a>0&&b>0&&c>0&&a<10&&b<10&&c<10,{a,b,c},Integers]

@@ -1,0 +1,8 @@
+Note that 8 and 9 pandigital are impossible to be prime, as all of them would be divisible by 3
+
+Searching in 7 pandigital list would be fruitful, and the following mathematica code will do the job:
+
+a=Permutations[{1,2,3,4,5,6,7}];
+Do[If[PrimeQ[FromDigits[a[[i]]]]==True,Print[FromDigits[a[[i]]]]],{i,1,7!}]
+
+Just look at the last number obtained.

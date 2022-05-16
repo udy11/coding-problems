@@ -1,0 +1,10 @@
+Euler's Totient Function is given as:
+
+Phi(n) = n * Prod((p-1) / p for all prime factors p)
+
+Thus the problem is to maximize:
+
+(p1 p2 p3...) / ((p1-1)(p2-1)(p3-1)...)
+
+Which of course can be maximized for n < 1000001 if all appropriate small
+primes are included, i.e. n = 2*3*5*7*11*13*17

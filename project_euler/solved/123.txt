@@ -1,0 +1,4 @@
+For even n, r = 2
+For odd  n, r = 2 * n * p_n
+
+So, a simple search in a list of primes will give the answer.

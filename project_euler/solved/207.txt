@@ -1,0 +1,18 @@
+ALGEBRA
+
+Solution of equation is:
+
+2^t = (1+sqrt(1+4*k)) / 2 = z (let)
+
+We want ratio P(m) = a/b, where for all k <= m
+b = number of k for which z is integer
+a = number of k for which z is a power of 2
+
+let, r = 1/12345
+
+quick calculation shows that for when a = 18, the ratio crosses r
+thus, a = 17, therefore b for which P(m) is just below r is
+b = 17 * 12345 + 1 = 209866
+
+the value of m can be calculated by b:
+m = ((2*b+2-1)**2-1)/4

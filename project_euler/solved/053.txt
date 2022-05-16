@@ -1,0 +1,5 @@
+Mathematica Code:
+
+c=0;
+Do[Do[If[Binomial[n,r]>1000000,c++],{r,1,n}],{n,1,100}];
+c

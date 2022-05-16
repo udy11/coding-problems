@@ -1,0 +1,119 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      3530,        110]
+NotebookOptionsPosition[      3110,         93]
+NotebookOutlinePosition[      3555,        110]
+CellTagsIndexPosition[      3512,        107]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", "TRIAL", " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "Just", " ", "print", " ", "some", " ", "numbers", " ", "to", " ", 
+     "realize", " ", "that", " ", 
+     RowBox[{"u", "[", "n", "]"}], " ", "begins", " ", "to", " ", "oscillate",
+      " ", "somewhat", " ", "after", " ", "500", " ", "and", " ", "so", " ", 
+     "the", " ", "sum", " ", 
+     RowBox[{"u", "[", "n", "]"}]}], "+", 
+    RowBox[{
+     RowBox[{"u", "[", 
+      RowBox[{"n", "+", "1"}], "]"}], " ", 
+     RowBox[{"converges", "."}]}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.656444538507167*^9, 3.6564446027614264`*^9}, {
+  3.6564446393138523`*^9, 3.65644465637568*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Definition", " ", "of", " ", "sequence"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"f", "[", "x_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"Floor", "[", 
+       SuperscriptBox["2", 
+        RowBox[{
+         FractionBox["30403243784", 
+          SuperscriptBox["10", "9"]], "-", 
+         SuperscriptBox["x", "2"]}]], "]"}], 
+      SuperscriptBox["10", 
+       RowBox[{"-", "9"}]]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"u", "[", "0", "]"}], "=", 
+     RowBox[{"-", "1"}]}], ";", 
+    RowBox[{
+     RowBox[{"u", "[", "n_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"u", "[", "n", "]"}], "=", 
+      RowBox[{"f", "[", 
+       RowBox[{"u", "[", 
+        RowBox[{"n", "-", "1"}], "]"}], "]"}]}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.6564419916233187`*^9, 3.656442056407911*^9}, {
+  3.656444502639706*^9, 3.6564445326767282`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"i", ",", 
+      RowBox[{"N", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"u", "[", "i", "]"}], "+", 
+         RowBox[{"u", "[", 
+          RowBox[{"i", "+", "1"}], "]"}]}], ",", "20"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "600", ",", "2"}], "}"}]}], "]"}], "//", 
+  "TableForm"}]], "Input",
+ CellChangeTimes->{{3.656442091470236*^9, 3.656442092770322*^9}, {
+   3.656442207688678*^9, 3.656442246691226*^9}, {3.6564422823320446`*^9, 
+   3.6564423317159824`*^9}, 3.6564423632680244`*^9, 3.6564424620745897`*^9, {
+   3.6564426119755535`*^9, 3.656442613375683*^9}, {3.656442720183325*^9, 
+   3.656442721313398*^9}, {3.6564428030282173`*^9, 3.6564428544220467`*^9}, 
+   3.6564432898222857`*^9}]
+},
+WindowSize->{701, 800},
+WindowMargins->{{Automatic, 106}, {35, Automatic}},
+Magnification:>FEPrivate`If[
+  FEPrivate`Equal[FEPrivate`$VersionNumber, 6.], 1.5, 1.5 Inherited],
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (November 20, 2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 735, 17, 162, "Input"],
+Cell[1295, 39, 978, 30, 131, "Input"],
+Cell[2276, 71, 830, 20, 75, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

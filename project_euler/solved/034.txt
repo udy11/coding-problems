@@ -1,0 +1,7 @@
+Mathematica Code:
+
+Do[If[i == Total[IntegerDigits[i]!], Print[i]], {i, 3, 9999999}]
+
+Just add once the numbers are out.
+
+Maximum limit is justified, since 7x9!=2540160.

@@ -1,0 +1,576 @@
+9400639
+136
+
+Sep 26, 2009#12
+all equilateral triangles count, so it has to be >=333
+I got:
+10->3
+100->46
+1000->610
+10000->7677
+Share
+
+Sep 26, 2009#20
+If a triangle of (a,b,c) works, shouldn't any triangle (ka, kb, kc) also work?
+This way you can construct a table bottom-up for which triangles satisfy the equation?
+Like
+Dislike
+Share
+
+9400639
+136
+
+Sep 26, 2009#22
+@bdiddycombes: what went wrong?
+@Luckytoilet:
+Yes, we have to generate the triangles for which gcd(a,b,c)=1.
+Each one of those will count 10^8/(a+b+c) times.
+we have
+(a+b)*(a+c)=k*b*c,
+where a
+Share
+
+Sep 26, 2009#24
+ok, this is what I have so far. I would appreciate if you could double check my math.
+k=2 or k=3
+(a+b)(a+c)=kbc
+a^2+ac+ab+bc=kbc
+a^2+(b+c)a-(k-1)bc=0
+a=[sqrt(b^2+2(2k-1)bc+c^2)-b-c]/2
+now a
+Share
+
+Sep 26, 2009#25
+ok,
+take a=[sqrt(b^2+2(2k-1)bc+c^2)-b-c]/2 and b=(2k-1)c/4
+then we want
+a+b+c
+Share
+
+Sep 26, 2009#26
+ok, brain is frying, been coding since about 4am. I'm going to take a break. Hopefully somebody can run with what I've found so far and get better results that I have thus far. I should be back in a few hours.
+Share
+
+Luckytoilet
+16951
+
+Sep 27, 2009#27
+5761455 primes under 10^8, 3.18e19 combinations of 3 primes.
+Maybe there's a way to derive such primes combinations using the formula for integral area?
+Like
+Dislike
+Share
+
+Sep 27, 2009#28
+This is what I got for a+b+c
+Like
+Dislike
+Share
+
+9400639
+136
+
+Sep 27, 2009#29
+see post 9 and 10 on page 1.
+if a=b=c, then always
+bc|(a+b)(a+c)
+is satisfied:
+(a*a=a^2)|((a+a)(a+a)=4a^2)
+btw, is it possible to set the page length parameter to 100 posts? - then we do not have to switch pages that much, tnx in advance
+Edit: tnx!
+Share
+
+Luckytoilet
+16951
+
+Sep 27, 2009#30
+Ok, I changed the posts per page to 100.
+Like
+Dislike
+Share
+
+9400639
+136
+
+Sep 27, 2009#31
+OK,
+//-----------------------------------------------------------------
+for k=2 we have:
+(a+c)(a+b)=2bc
+so
+a^2+(b+c)a-bc=0
+abc-formula gives for a>0:
+a=[-(b+c)+sqrt(b^2+6bc+c^2)]/2
+so b^2+6bc+c^2 has to be a perfect square, which lead to
+formula (6) on http://mathworld.wolfram.com/Diophantin ... owers.html:
+ax^2+bxy+cy^2=dz^2
+where a=1, b=6, c=1, d=1, x=our b, y=our c:
+b^2+6bc+c^2=z^2 for some z
+our first k=2 triangle having gcd(a,b,c)=1 is (6,14,15)
+therefore
+14^2+6*14*15+15^2=z^2 => z=41
+so (14,15,41) is an initial solution, and we can generate others with arbitrary u and v (see url above)
+//-----------------------------------------------------------------
+for k=3 we have (almost copy of the above):
+(a+c)(a+b)=3bc
+so
+a^2+(b+c)a-2bc=0
+abc-formula gives for a>0:
+a=[-(b+c)+sqrt(b^2+10bc+c^2)]/2
+so b^2+10bc+c^2 has to be a perfect square, which lead to
+ax^2+bxy+cy^2=dz^2
+where a=1, b=10, c=1, d=1, x=our b, y=our c:
+b^2+10bc+c^2=z^2 for some z
+our first k=3 triangle having gcd(a,b,c)=1 is (4,5,6)
+therefore
+5^2+10*5*6+6^2=z^2 => z=19
+so (5,6,19) is an initial solution, and we can generate others with arbitrary u and v (see url above)
+//------------------------------------------------------------------
+Now we can generate triangles both for k=2 and k=3.
+Last steps:
+- filter on integer a
+- filter on gcd(a,b,c)=1
+- count each triangle 10^8/(a+b+c) times in the total.
+I have to go for now, plz feel free to comment and/or work on this idea.
+Share
+
+bdiddycombes
+186
+
+Sep 27, 2009#32
+*edited due to initial error in my computation*
+ok,working off of what you gave sir.knowalot I got the following
+with k=2
+a=94uv-24u^2-22v^2
+b=104u^2+30uv-14v^2
+c=99v^2+28uv-15u^2
+with k=3
+a=84uv-20u^2-16v^2
+b=65u^2+12uv-5v^2
+c=56v^2+10uv-6u^2
+now I'm working on restrictions for u,v for each of k=2,3
+Share
+
+Sep 27, 2009#33
+ok, this is what I got now. I tried the diophantine approach suggested by sir.knowalot and reached nothing but dead ends. so I went back to the drawing board.
+Going back to my attempt using Mathematica's reduce, I realized that the initial error was on my part, not Mathematica's as I should have suspected from the begining.
+*going forward L is the limit with a+b+c
+Share
+
+Sep 27, 2009#34
+tranfered my program to a computer with a much faster processor, now I estimate it should give an answer in about 12hr verses 24hr+.
+Share
+
+bassrael
+14
+
+Sep 27, 2009#35
+if you'd format the code properly, i can translate it and get it faster (already see a few optimizations here, but indentations are a mess..)
+Share
+
+bdiddycombes
+186
+
+Sep 27, 2009#36
+let me know if this is any better
+
+Code: Select all
+
+#include 
+#include 
+using namespace std;
+typedef unsigned __int64 u64;
+u64 CntTri(u64 Lmt)
+{
+    u64 cnt=Lmt/3;
+    u64 x,y,z;
+    u64 xmx=Lmt/(2+sqrt(3));
+    u64 goal=0.001*xmx,stp=goal;
+    for(x=1;x
+
+Share
+
+bassrael
+14
+
+Sep 27, 2009#37
+perfect!
+i translated it word by word before improving it, unfortunately it yields the exact count for a == b == c, therefore an incorrect answer.
+\edit:
+
+Code: Select all
+
+{'lmt': 10, 't': 0.00063974611298363347, 'ret': 3}
+{'lmt': 100, 't': 0.00010196826691660527, 'ret': 33}
+{'lmt': 1000, 't': 0.00093950488120696902, 'ret': 333}
+{'lmt': 10000, 't': 0.0087458042851814959, 'ret': 3333}
+{'lmt': 100000, 't': 0.078928746530634475, 'ret': 33333}
+
+is this what you get, too?
+Share
+
+bdiddycombes
+186
+
+Sep 27, 2009#38
+not sure what all you did when optimizing but I know my original code matches know values for 10,100,1000, and 10000
+anyway, been up almost 24hrs now. gonna go catch some sleep before I do another 12hr shift. If nobody else can improve upon my code I'm leaving it run and it should be complete in another 10hrs.
+Share
+
+bassrael
+14
+
+Sep 27, 2009#39
+are you sure you typed this correctly?
+(line 20)
+
+Code: Select all
+
+while(y
+
+Share
+
+born2code
+45
+
+Sep 27, 2009#40
+Guys, drop the sqrt statements and replace them with constants. Much faster, sqrt is a very slow process. And use pre increment rather than post increment (++i rather than i++). Let me see if I can optimize that C++ code.
+Share
+
+bdiddycombes
+186
+
+Sep 27, 2009#41
+implemented your two suggestions about the constants and the ++i versus i++ and it brought it down from 24hr to 7hr on my slow computer (unfortunately my fast computer at work is stuck running the slower verison of the program). But it looks like we should have a solution before I get back to work in about 10 hours
+Share
+
+born2code
+45
+
+Sep 27, 2009#42
+See if Heron's formula helps:
+http://en.wikipedia.org/wiki/Heron%27s_formula
+Calculates the area of triangles using just the length of the sides.
+Also, can you post the optimized code?
+Share
+
+bdiddycombes
+186
+
+Sep 27, 2009#43
+here is the optimized code
+not sure where I could use Heron's formula as at no point am I computing the area of a triangle. If you look at the first posts we determined that for triangle a
+Share
+
+Sep 28, 2009#44
+found some more improvements as follows:
+first I realized that with the restrictions on a,b,c it is always true that a+b>c and a(a+b+c)=0 mod bc (obviously assuming c is an integer) so I removed these tests
+further I noticed that I failed to change cnt++ to ++cnt in the 2 places where I increment it.
+these 2 changes have improved the speed of the computations slightly
+the improved code follows:
+
+Code: Select all
+
+#include 
+#include 
+using namespace std;
+typedef unsigned __int64 u64;
+u64 CntTri(u64 Lmt)
+{
+    u64 cnt=Lmt/3;
+    u64 x,y,z;
+    u64 xmx=Lmt/(2+sqrt(3));
+    u64 goal=0.001*xmx,stp=goal;
+    float k1=1+sqrt(2),k2=2*sqrt(2)+3,k3=(1+sqrt(3))/2;
+    for(x=1;x
+
+Share
+
+9400639
+136
+
+Sep 28, 2009#45
+Well, I confirm the quadratic parametrization did not work as I hoped for: it does not generate ALL solutions like Pell or the Pythagorean Triangle generator. Although I found some other parameters than bddidycombes, no results.
+Still, there must be some effective generator function, I will look around for that one while your programs are running.
+Share
+
+bdiddycombes
+186
+
+Sep 28, 2009#46
+grrr, got to work and low an behold, somebody logged me off of the computer that I had left running my program. Back to square one. I'm transferring my latest optimized program to the work computer and will start it running again, hopefully it will give us something by the end of my 12hr shift. I will also continue working forming a generating algorithm
+Share
+
+Sep 28, 2009#47
+ok, this is what I got so far
+for k=2
+b^2+6bc+c^2=z^2
+b^2+6bc+c^2-z^2=0
+b=(-6c+sqrt(36c^2-4(c^2-z^2)))/2
+b=(-6c+2sqrt(8c^2+z^2))/2
+b=-3c+sqrt(8c^2+z^2)
+so we want
+8c^2+z^2=w^2
+and for k=3
+b^2+10bc+c^2=z^2
+b^2+10bc+c^2-z^2=0
+b=(-10c+sqrt(100c^2-4(c^2-z^2)))/2
+b=(-10c+2sqrt(24c^2+z^2))/2
+b=-5c+sqrt(24c^2+z^2)
+so we want
+24c^2+z^2=w^2
+so it boils down to these 2 equations
+w^2-z^2=8c^2
+w^2-z^2=24c^2
+which are of the form
+x^-y^2=d*z^2
+now I remember seeing a generalized method for solving this type of equation but I can seem to find it for the life of me.
+Share
+
+Sep 28, 2009#48
+eureka, I feel so foolish for having not seen it sooner.
+for equation
+x^-d*y^2=z^2
+let (p,q) be a solution of the pell equation
+p^2-dq^2=1 then we have
+(zp,zq) is a solution of x^2-dy^2=z^2 by
+(zp)^2-d(zq)^2=z^2
+z^2(p^2-dq^2)=z^2
+z^2=z^2
+and there is a nice quick way of getting solutions for p^2-dq^2=1 using the continued fraction of sqrt(d)
+Share
+
+Sep 28, 2009#49
+ok, having trouble getting my new program to work. What I'm trying to do is use the reccurence detailed here http://en.wikipedia.org/wiki/Pell's_equation
+to generate the solutions to the pell equations p^2-8q^2=1 and p^2-24q^2=1 and then using those multipling them by an increasing factor to get a,b,c until a+b+c>Lmt
+and at each step test to see if it is a valid triangle. Unfortunately it is not finding any of them. Not sure why
+here is my code so far
+
+Code: Select all
+
+#include 
+#include 
+using namespace std;
+typedef unsigned __int64 u64;
+u64 Min(u64 x,u64 y)
+{
+ if(x
+
+Share
+
+9400639
+136
+
+Sep 28, 2009#50
+we need solutions for
+w^2-24c^2=z^2
+If (p,q) is a solution of the pell equation
+p^2-24q^2=1 then we have
+(zp,zq,z) is a solution of w^2-24c^2=z^2
+and NOT the reverse: Pell does not find ALL solutions, e.g.:
+(7,1,5) is a solution of w^2-24c^2=z^2,
+but it can not be generated by Pell: p^2-24q^2=1
+But all we need now is a general solution for w^2-24c^2=z^2
+(and the second equation w^2-8c^2=z^2)
+... it feels we are on the right track
+Share
+
+bdiddycombes
+186
+
+Sep 28, 2009#51
+thank you, I actually realized my blunder quite a while ago when I stumbled across this document
+http://books.google.com/books?id=q9cPNg ... &q=&f=true
+that shows how to solve x^2-dy^2=z^2
+I just now solved the case for k=2 and k=4 which give a combined total of 36782190 triangles. Now I just need to figure out how many k=3 contribute. For some strange reason the method I used for k=2 is not working for k=3.
+Share
+
+Sep 28, 2009#52
+ok, I'm really crossing my fingers on this one. I gave up on using the pell equation approach and am resorting to the slower method, I'm using the known values for k=2 and k=4 to avoid having to compute those. This has drasticly improved program run time to the point I anticipate having answer within a couple hours if not sooner. I am placing the code below. If anybody has access to a fast computer please feel free to run it
+
+Code: Select all
+
+#include 
+#include 
+using namespace std;
+typedef unsigned __int64 u64;
+u64 CntTri(void)
+{
+ u64 Lmt=100000000;
+ u64 a,b,c;
+ u64 cnt=36782190;
+ float k1=2+sqrt(3),k2=(1+sqrt(3))/2;
+ u64 mxa=Lmt/k1;
+ u64 goal=0.0001*mxa,stp=goal;
+ u64 mxb;
+ for(a=1;a
+
+Share
+
+bdiddycombes
+186
+
+Sep 28, 2009#54
+ok, for k=4 this is simply the equilateral triangles and we know its value to be Lmt/3
+for k=2 we have
+a=(-b-c+sqrt(b^2+6bc+c^2))/2
+so we want
+b^2+6bc+c^2=z^2
+b=-3c+sqrt(8c^2+z^2)
+so we want
+8c^2+z^2=w^2
+w^2-8c^2=z^2
+using method outlined here
+http://books.google.com/books?id=q9cPNg ... &q=&f=true
+I get
+w=t1=6 c=u1=2
+and in general we have (tk is kth t and uk is kth u)
+(tk+uk*sqrt(8))/2=((6-2*sqrt(8))/2)^k
+expand this out using binomial theorem and you get B(n,i) is binomial i.e n choose i
+uk=2*Sumation[B(n,2i-1)*8^(i-1)*3^(n-2i+1),i=0 to floor((n+1)/2)]
+now I used the following Mathematica code to compute what k=2 and k=4 contributes
+
+Code: Select all
+
+Cn1[n_] := 
+  2*Sum[Binomial[n, 2*i - 1]*8^(i - 1)*3^(n - 2*i + 1), {i, 0, 
+     Floor[(n + 1)/2]}];
+GetTri[n_] := (
+   c1 = Cn1[n];
+   b1 = Sqrt[8*c1^2 + 4] - 3*c1;
+   a1 = (-b1 - c1 + Sqrt[b1^2 + 6*b1*c1 + c1^2])/2;
+   t = b1;
+   b1 = -a1;
+   a1 = -t;
+   c1 = a1*(a1 + b1)/(b1 - a1);
+   g = GCD[a1, b1, c1];
+   a1 = a1/g;
+   b1 = b1/g;
+   c1 = c1/g;
+   Return[{a1, b1, c1}];
+   );
+Perim[n_] := Total[GetTri[n]];
+k = 3;
+p = Perim[k];
+Lmt = 100000000;
+cnt = Floor[Lmt/3];
+While[p
+
+Share
+
+Sep 28, 2009#55
+its the end of another shift, and yet another dead end I have reached. Perhaps I am not meant to solve this one . It seems that I misunderstood the methodology entailed here
+http://books.google.com/books?id=q9cPNg ... &q=&f=true
+try as I might I just can't seem to get it to work to consistently produce valid a,b,c. My gut tells me this is the key to quickly compute the answer yet I can't seem to figure out how. Hopefully one of you will have better luck. I'm going to get some sleep and try again when I am more rested.
+Share
+
+9400639
+136
+
+Sep 28, 2009#56
+your link did not work for me, but now found an alternative at: http://www.gutenberg.org/files/20073/20073-pdf.pdf
+I also just found http://www.maths.tcd.ie/pub/ims/bull58/R5801.pdf solving x^2-Dy^2=c^n
+since we need
+w^2-8c^2=z^2
+w^2-24c^2=z^2
+and z takes a limited number of values, we can possibly use this method to solve x^2-Dy^2=c^n for each possible c=z and n=2.
+to be continued...
+Share
+
+Oct 01, 2009#80
+I've been working on some pattern recognition for the various primitive solutions. (Primitive meaning GCD(a,b,c)=1). So far I've found that if (a+b)(a+c)/(bc)=2 then for all primitive solutions a=m(m+n) with m>n and GCD(m,n)=1. Futhermore a=2m^2-m b=4m^2-m c=6m^2-5m+1 always gives a primitive solution.
+Share
+
+bdiddycombes
+186
+
+Oct 01, 2009#81
+I have found a more generalized form of my previous posting.
+a=m(2m-k)
+b=m(4m-k)
+c=(3m-k)(2m-k)
+with restriction of 1
+Share
+
+Oct 02, 2009#82
+further update, I missed some further restrictions on k, and am working on placing an upper limit on m based on a+b+c
+Share
+
+Oct 02, 2009#85
+Digging into the Diophantines and doing the paperwork gave results:
+We know
+k=2: b^2+6bc+c^2 has to be a perfect square
+k=3: b^2+10bc+c^2 has to be a perfect square
+//--------------------------------------------------------
+For k=2:
+we have to solve
+x^2+6xy+y^2=z^2 (eq1)
+where (due to symmetry)
+b=min{x,y}
+c=max{x,y}
+this equation can be transformed to
+u^2+pv^2=z^2 (eq2)
+by linear transformation:
+u=ax+by
+v=cx+dy
+substituting in (eq2) and comparing with (eq1) gives:
+a^2+pc^2=1
+ab+pcd=3
+b^2+pd^2=1
+solving this gives:
+u=x+3y
+v=-2y
+p=-2
+Now we have to find all solutions of
+u^2-2v^2=z^2 (eq3)
+which has a basic solution (3,2,1).
+For this, we have to solve
+p^2-2q^2=1 (eq4)
+which has partial solutions
+(p,q)=(p0+t,q0+mt) where p0=3 and q0=2 (see above)
+(p,q)=(p0+nt,q0+t) where p0=3 and q0=2 (see above)
+which in combination lead to
+p=(-3n^2+8nm-6m^2)/(n^2-2m^2)
+q=(2n^2-6nm+4m^2)/(n^2-2m^2)
+so integral solutions for (eq3) are:
+u = -3n^2+8nm-6m^2
+v = 2n^2-6nm+4m^2
+z = n^2-2m^2
+with gcd(m,n)=1
+In (eq3) u, v and z are all squared, therefore we do not bother about the signs.
+So we take
+z=positive, since it is the square root solution
+v=negative, since y (b or c) has to be positive (note that 2|v)
+u=positive, since x (b or c) has to be positive.
+now we have a, b and c.
+//--------------------------------------------------------
+And similar for k=3:
+x^2+10xy+y^2=z^2
+gives
+u=x+5y
+v=2y
+p=-6
+so
+u^2-6v^2=z^2
+with basic solution (5,2,1)
+and
+equations:
+u = -5n^2+24nm-30m^2
+v = 2n^2-10nm+12m^2
+z = n^2-6m^2
+with gcd(m,n)=1
+//--------------------------------------------------------
+so we can generate all solutions with (k=3 values; use __int64 variables):
+
+Code: Select all
+
+for(n=0;nc){
+          g=gcd(a,b,c);
+          if(g>1){a/=g; b/=g; c/=g;}
+          if((a+b+c)
+
+Share
+
+Oct 02, 2009#88
+furthermore I determined the required limits for Lmt=10^3, 10^4, and 10^5 and based on those limiting m and n to 20000 should be more than sufficient. I'm at work and due to some BGP flaps I had to look into I missed starting my stopwatch for the 1% and 2% indication. Hopefully I should be able to catch the 3% to 4% time and make an estimate based on that.
+Share

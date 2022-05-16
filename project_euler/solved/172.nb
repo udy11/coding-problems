@@ -1,0 +1,174 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6038,        166]
+NotebookOptionsPosition[      5616,        151]
+NotebookOutlinePosition[      5989,        167]
+CellTagsIndexPosition[      5946,        164]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"GENERATING", " ", "FUNCTIONS"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "This", " ", "is", " ", "a", " ", "simple", " ", "problem", " ", "of", 
+     " ", "permutations", " ", "of", " ", "a", " ", 
+     RowBox[{"multiset", ".", " ", "To"}], " ", "find", " ", "n", " ", 
+     "permutations", " ", "from", " ", "a", " ", "multiset", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"r0", " ", "*", " ", "i0"}], ",", " ", 
+       RowBox[{"r1", " ", "*", " ", "i1"}], ",", " ", "..."}], ")"}]}], ",", 
+    " ", 
+    RowBox[{
+    "one", " ", "needs", " ", "to", " ", "make", " ", "an", " ", 
+     "exponential", " ", "generating", " ", "function", " ", 
+     RowBox[{"Product", "[", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"1", "+", 
+           FractionBox[
+            SuperscriptBox["z", "1"], 
+            RowBox[{"1", "!"}]], "+", 
+           FractionBox[
+            SuperscriptBox["z", "2"], 
+            RowBox[{"2", "!"}]], "+"}], "..."}], "+", 
+         FractionBox[
+          SuperscriptBox["z", "ri"], 
+          RowBox[{"ri", "!"}]]}], ")"}], ",", "i"}], "]"}], " ", "and", " ", 
+     "extract", " ", "the", " ", "coefficient", " ", "of", " ", 
+     SuperscriptBox["z", "n"], " ", "and", " ", "multiply", " ", "it", " ", 
+     "with", " ", 
+     RowBox[{
+      RowBox[{"n", "!"}], ".", " ", "In"}], " ", "this", " ", "problem", " ", 
+     "all", " ", "digits", " ", "can", " ", "appear", " ", "only", " ", "0", 
+     " ", "to", " ", "3", " ", "times"}], ",", " ", 
+    RowBox[{"so", " ", "generating", " ", "function", " ", "is", " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "+", "z", "+", 
+        FractionBox[
+         SuperscriptBox["z", "2"], "2"], "+", 
+        FractionBox[
+         SuperscriptBox["z", "3"], "6"]}], ")"}], "10"]}], ",", " ", 
+    RowBox[{
+    "one", " ", "can", " ", "find", " ", "the", " ", "coefficient", " ", "of",
+      " ", 
+     RowBox[{
+      SuperscriptBox["z", "18"], ".", " ", "However"}]}], ",", " ", 
+    RowBox[{
+    "in", " ", "this", " ", "we", " ", "are", " ", "also", " ", "counting", 
+     " ", "all", " ", "those", " ", "numbers", " ", "that", " ", "start", " ",
+      "with", " ", "0.", " ", "To", " ", "subtract", " ", "such", " ", 
+     "numbers", " ", "we", " ", "can", " ", "similarly", " ", "use", " ", 
+     "the", " ", "generating", " ", "function", " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "+", "z", "+", 
+        FractionBox[
+         SuperscriptBox["z", "2"], "2"], "+", 
+        FractionBox[
+         SuperscriptBox["z", "3"], "6"]}], ")"}], "9"], 
+     RowBox[{"(", 
+      RowBox[{"1", "+", "z", "+", 
+       FractionBox[
+        SuperscriptBox["z", "2"], "2"]}], ")"}]}], ",", " ", 
+    RowBox[{
+    "where", " ", "last", " ", "entry", " ", "is", " ", "for", " ", "0"}], 
+    ",", " ", 
+    RowBox[{
+    "and", " ", "extract", " ", "the", " ", "coefficient", " ", "of", " ", 
+     RowBox[{
+      SuperscriptBox["z", "17"], ".", " ", "Logically"}], " ", "this", " ", 
+     "should", " ", "be", " ", 
+     RowBox[{"1", "/", "10"}], " ", "of", " ", "what", " ", "we", " ", 
+     "calculated", " ", 
+     RowBox[{"earlier", ".", " ", "Then"}], " ", "subtracting", " ", "them", 
+     " ", "gives", " ", "the", " ", 
+     RowBox[{"answer", "."}]}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.8099629581715593`*^9, 3.8099629619531593`*^9}, {
+  3.8099635599222083`*^9, 3.8099636909223013`*^9}, {3.8099637472240744`*^9, 
+  3.809964045163429*^9}, {3.8099641095438085`*^9, 
+  3.8099641337176003`*^9}},ExpressionUUID->"adc8598f-a333-4460-9a90-\
+51f573efc256"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"n18", "=", 
+   RowBox[{
+    RowBox[{"Coefficient", "[", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "+", "z", "+", 
+         FractionBox[
+          SuperscriptBox["z", "2"], "2"], "+", 
+         FractionBox[
+          SuperscriptBox["z", "3"], "6"]}], ")"}], "10"], ",", 
+      SuperscriptBox["z", "18"]}], "]"}], 
+    RowBox[{"18", "!"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"n17", "=", 
+   RowBox[{
+    RowBox[{"Coefficient", "[", 
+     RowBox[{
+      RowBox[{
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "+", "z", "+", 
+          FractionBox[
+           SuperscriptBox["z", "2"], "2"], "+", 
+          FractionBox[
+           SuperscriptBox["z", "3"], "6"]}], ")"}], "9"], 
+       RowBox[{"(", 
+        RowBox[{"1", "+", "z", "+", 
+         FractionBox[
+          SuperscriptBox["z", "2"], "2"]}], ")"}]}], ",", 
+      SuperscriptBox["z", "17"]}], "]"}], 
+    RowBox[{"17", "!"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"n18", "-", "n17"}]}], "Input",
+ CellChangeTimes->{{3.8099620462650814`*^9, 3.809962096304289*^9}, {
+  3.809962151154417*^9, 3.8099621518111014`*^9}, {3.8099634666965237`*^9, 
+  3.809963551640436*^9}},
+ CellLabel->"In[15]:=",ExpressionUUID->"fe2f996b-c85a-4121-9408-2e5fa2790000"]
+},
+WindowSize->{759, 645},
+WindowMargins->{{85, Automatic}, {20, Automatic}},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3730, 89, 438, "Input",ExpressionUUID->"adc8598f-a333-4460-9a90-51f573efc256"],
+Cell[4291, 111, 1321, 38, 142, "Input",ExpressionUUID->"fe2f996b-c85a-4121-9408-2e5fa2790000"]
+}
+]
+*)
+

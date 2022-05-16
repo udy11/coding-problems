@@ -1,0 +1,8 @@
+https://en.wikipedia.org/wiki/Combination
+https://en.wikipedia.org/wiki/Multiset#Counting_multisets
+https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)
+
+http://mathonline.wikidot.com/combinations-of-elements-in-multisets-with-finite-repetition
+https://math.stackexchange.com/a/634058
+https://www.whitman.edu/mathematics/cgt_online/book/
+https://mathoverflow.net/questions/33273/combinations-of-multisets-with-finite-multiplicities

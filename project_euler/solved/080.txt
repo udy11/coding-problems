@@ -1,0 +1,6 @@
+Mathematica Code:
+
+Total[Table[RealDigits[Sqrt[i], 10, 100], {i, 1, 100}], -1] - Sum[i, {i, 9}] - 1 - 101
+
+-Sum[1,9] due to perfect squares
+-1 due to sqrt(100) and -101 due to the inner mechanism of RealDigits and Total, which I don't know much about.
