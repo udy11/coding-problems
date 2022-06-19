@@ -6,6 +6,8 @@ This code repository hosts my solutions to programming puzzles and problems from
 
 ![Level-8](https://projecteuler.net/profile/udy11.png)
 
+Project Euler suggests its users to not publish solutions for problems beyond first 100. So, solutions of problems 100+ have been archived in a password-protected file in [project_euler](project_euler) folder, whose password can be requested from me if you only want to see my codes for any purpose other than using them to submit answers on Project Euler. In the [folder](project_euler), solutions of first 100 problems can be found, but since they were written when I had barely started learning to program, my solutions might not be good and codes might not be well written.
+
 **Advent of Code**: I very recently started solving problems here and hope to catch up soon.
 
 **CodeChef**: I only tried few problems several years ago and might start it again some time. You can check my profile [here](https://www.codechef.com/users/shn11).
@@ -53,6 +55,7 @@ I think this is also an appropriate place to list all my favorite puzzle games t
 - The Witness (523-135, with all audio logs)
 - Time Master (with 470 fragments, 133 stars)
 - World of Goo
+- Yugo Puzzle
 - Zero Escape 999
 - Zero Escape Virtue's Last Reward
 - Zof

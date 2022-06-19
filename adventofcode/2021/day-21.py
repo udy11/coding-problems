@@ -66,8 +66,8 @@ def p2(inp):
 in0 = (4, 8)
 in1 = (6, 1)
 
-#print('Result for Test Puzzle 1:', p1(in0))
-#print('Result for Puzzle 1:', p1(in1))
-print('Result for Test Puzzle 2:', p2(in0))
+print('Result for Test Puzzle 1:', p1(in0))
+print('Result for Puzzle 1:', p1(in1))
+#print('Result for Test Puzzle 2:', p2(in0))
 #print('Result for Puzzle 2:', p2(in1))
 
