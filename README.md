@@ -12,7 +12,7 @@ Project Euler suggests its users to not publish solutions for problems beyond fi
 
 **CodeChef**: I only tried few problems several years ago and might start it again some time. You can check my profile [here](https://www.codechef.com/users/shn11).
 
-**RoseCode**: Similar to CodeChef, I might try it some time.
+**RoseCode**: Status similar to CodeChef, I might try it some time.
 
 I think this is also an appropriate place to list all my favorite puzzle games that I have completed:
 
@@ -24,6 +24,7 @@ I think this is also an appropriate place to list all my favorite puzzle games t
 - Gorogoa
 - Hex-A-Hop (25% mastered)
 - Hexcells Infinite (without any mistake)
+- Hourglass (solved all puzzles)
 - Jelly no Puzzle (with 3 unreleased levels)
 - Lightmatter
 - Limbo
@@ -41,12 +42,15 @@ I think this is also an appropriate place to list all my favorite puzzle games t
 - Q.U.B.E. 2
 - Quantum Conundrum (with all collectibles)
 - Quern - Undying Thoughts
+- Recursive Ruin
 - Relicta
 - Return of the Obra Dinn
 - Shady Part of Me
 - Superluminal (with all chess pieces, blueprints, constellations)
 - Supraland (with Crash DLC, both 100%)
+- Supraland Six Inches Under (100%)
 - The Last Campfire (with all forgotten things)
+- The Last Cube (with all relics)
 - The Misadventures of P.B. Winterbottom
 - The Room 1-4
 - The Sojourn (with all scrolls)
@@ -60,6 +64,6 @@ I think this is also an appropriate place to list all my favorite puzzle games t
 - Zero Escape Virtue's Last Reward
 - Zof
 
-The complete list of all games that I've completed can be found [here](https://www.dropbox.com/s/vd8xtqa1hkvl9ox/My%20Finished%20Games.xlsx?dl=0).
+The complete list of all games that I've completed can be found [here](https://www.dropbox.com/s/vd8xtqa1hkvl9ox/My%20Finished%20Games.xlsx?dl=1).
 
 For any feedback, query or discussion, please contact me on [email](mailto:udaya_cbscients@yahoo.com) or [Telegram](https://t.me/udy11). If any of my work has been useful to you and you would like to donate cryptocurrencies, please click [here](https://github.com/udy11/udy11/blob/main/Donate_Crypto.md) or [here](https://gitlab.com/udy11/udy11/-/blob/main/Donate_Crypto.md). Thanks for visiting :)
